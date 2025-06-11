@@ -5,12 +5,12 @@
     <div class="header__container header__container--left">
       <div class="header__title">
         <h1>Allan PEREZ</h1>
-        <h2>Developpeur Full Stack</h2>
-        <h3>Prêt à relever de nouveaux challenges.</h3>
+        <h2>{{title|translate}}</h2>
+        <h3>{{description |translate}}</h3>
       </div>
 
       <div class="header__links">
-        <div class="header__link">
+        <div class="header__link" [routerLink]="['/', currentLang, 'resume']">
           <div class="header__link--title">{{ "resume" | translate }}</div>
           <div class="header__link--icons">
             <img src="/assets/Java.svg" alt="Java" class="header__link--icon" />
@@ -31,7 +31,7 @@
             />
           </div>
         </div>
-        <div class="header__link">
+        <div class="header__link" [routerLink]="['/', currentLang, 'projects']">
           <div class="header__link--title">{{ "projects" | translate }}</div>
           <div class="header__link--icons">
             <img
@@ -46,7 +46,7 @@
             />
           </div>
         </div>
-        <div class="header__link">
+        <div class="header__link" [routerLink]="['/', currentLang, 'about']">
           <div class="header__link--title">{{ "about" | translate }}</div>
           <div class="header__link--icons">
             <img

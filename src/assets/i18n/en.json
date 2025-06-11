@@ -2,5 +2,26 @@
   "home": "Home",
   "resume": "Resume",
   "projects": "Projects",
-  "about": "About"
+  "about": "About",
+  "home.title1": "Odoo Expert",
+  "home.title2": "Passionate Developer",
+  "home.title3": "Innovative Solutions Creator",
+  "home.title4": "Modern Tech Expert",
+  "home.title5": "Technical Challenge Lover",
+  "home.title6": "Software Engineer",
+  "home.title7": "System Architect",
+  "home.title8": "Full-Stack Developer",
+  "home.title9": "Web Development Specialist",
+  "home.title10": "Tech Enthusiast",
+
+  "home.description1": "Curious, passionate, always exploring.",
+  "home.description2": "Build, innovate, enhance experience.",
+  "home.description3": "Modern, efficient, scalable solutions.",
+  "home.description4": "Tech challenges, creative joy.",
+  "home.description5": "Clean, durable, maintainable code.",
+  "home.description6": "Robust architecture, future-ready.",
+  "home.description7": "Full-stack: front meets back.",
+  "home.description8": "Fast, modern, thoughtful web.",
+  "home.description9": "Tech addict, always updated.",
+  "home.description10": "Useful, lasting, smart solutions."
 }
