@@ -29,7 +29,10 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              }
+              },
+              "src/assets",
+              "src/i18n",
+              "src/favicon.ico"
             ],
             "styles": [
               "src/styles.scss"
