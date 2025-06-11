@@ -18,6 +18,7 @@ export class NavbarComponent {
     { name: 'home', path: '' },
     { name: 'resume', path: 'resume' },
     { name: 'projects', path: 'projects' },
+    { name: 'about', path: 'about' },
   ];
 
   socials = [

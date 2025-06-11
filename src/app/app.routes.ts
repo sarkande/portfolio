@@ -2,14 +2,16 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { ProjectsComponent } from './pages/projects/projects.component';
 import { ResumeComponent } from './pages/resume/resume.component';
+import { AboutComponent } from './pages/about/about.component';
 
 export const routes: Routes = [
   {
-    path: ':lang', // prefixe langue dynamique
+    path: ':lang', 
     children: [
-      { path: '', component: HomeComponent }, // /fr ou /en
-      { path: 'projects', component: ProjectsComponent }, // /fr/projects ou /en/projects
-      { path: 'resume', component: ResumeComponent }, // /fr/resume ou /en/resume
+      { path: '', component: HomeComponent }, 
+      { path: 'projects', component: ProjectsComponent }, 
+      { path: 'resume', component: ResumeComponent }, 
+      { path: 'about', component: AboutComponent }, 
     ],
   },
   { path: '', redirectTo: 'fr', pathMatch: 'full' },
