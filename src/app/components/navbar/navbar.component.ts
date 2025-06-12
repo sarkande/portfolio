@@ -5,11 +5,10 @@ import { LanguageService } from '../../services/language.service'; // Chemin sel
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-navbar',
-  standalone: true,
-  imports: [CommonModule, RouterModule, TranslateModule],
-  templateUrl: './navbar.component.html',
-  styleUrl: './navbar.component.scss',
+    selector: 'app-navbar',
+    imports: [CommonModule, RouterModule, TranslateModule],
+    templateUrl: './navbar.component.html',
+    styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
   currentLang = 'fr';
