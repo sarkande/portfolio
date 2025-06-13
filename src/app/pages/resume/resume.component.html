@@ -1,1 +1,27 @@
-<p>cv works!</p>
+<ngx-timeline
+  [reverseOrder]="true"
+  [events]="events"
+  [eventCustomTemplate]="customEventTemplate"
+></ngx-timeline>
+
+<ng-template #customEventTemplate let-event="event">
+  <div
+    class="custom-timeline-event"
+    [ngClass]="{
+      'event-left': event.position === 'ON_LEFT',
+      'event-right': event.position === 'ON_RIGHT',
+      'event-en-cours': isEventEnCours(event.eventInfo)
+    }"
+  >
+    <div class="event-header">
+      <h3 class="event-title">{{ event.eventInfo.title }}</h3>
+      <span class="event-date">
+        {{ event.eventInfo.timestamp | date:'MMM yyyy' }}
+        @if (event.eventInfo.endDate && (event.eventInfo.timestamp.getTime() !== event.eventInfo.endDate.getTime())) {
+          - {{ event.eventInfo.endDate | date:'MMM yyyy' }}
+        }
+      </span>
+    </div>
+    <p class="event-description">{{ event.eventInfo.description }}</p>
+  </div>
+</ng-template>

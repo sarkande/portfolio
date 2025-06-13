@@ -6,10 +6,11 @@ import { CommonModule } from '@angular/common';
 import { firstValueFrom } from 'rxjs';
 
 @Component({
-    selector: 'app-home',
-    imports: [TranslateModule, RouterModule, CommonModule],
-    templateUrl: './home.component.html',
-    styleUrl: './home.component.scss'
+  selector: 'app-home',
+  imports: [TranslateModule, RouterModule, CommonModule],
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.scss',
+  standalone: true,
 })
 export class HomeComponent implements AfterViewInit {
   // Propriétés de gestion de la langue et des clés de traduction

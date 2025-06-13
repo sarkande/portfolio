@@ -13,7 +13,8 @@ import { LanguageService } from './services/language.service';
     selector: 'app-root',
     imports: [RouterOutlet, NavbarComponent],
     templateUrl: './app.component.html',
-    styleUrl: './app.component.scss'
+    styleUrl: './app.component.scss',
+    standalone: true,
 })
 export class AppComponent implements OnInit {
   title = 'portfolio';
