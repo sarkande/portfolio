@@ -1,0 +1,46 @@
+.sidebar {
+    position: fixed;
+    top: 80px; // adapte selon ton layout
+    left: 0;
+    width: 300px;
+    height: calc(100% - 80px);
+    padding: 1rem;
+    background-color: #f8f8f8;
+    border-right: 1px solid #ddd;
+    overflow-y: auto;
+
+    input {
+        width: 100%;
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
+    .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+
+        span {
+            padding: 0.4rem 0.6rem;
+            background-color: #eee;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+
+            &.active {
+                background-color: #ff6600;
+                color: white;
+                &:hover {
+                    background-color: #e65c00;
+                }
+            }
+
+            &:hover {
+                background-color: #e0e0e0;
+            }
+        }
+    }
+}

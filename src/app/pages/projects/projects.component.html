@@ -1,1 +1,12 @@
-<p>projects works!</p>
+<app-search-sidebar
+  [tags]="allTags"
+  (search)="onSearch($event)"
+  (tagsSelected)="onTags($event)"
+></app-search-sidebar>
+
+<div class="project-list" >
+  <app-project-card
+    *ngFor="let project of filtered"
+    [project]="project"
+  ></app-project-card>
+</div>

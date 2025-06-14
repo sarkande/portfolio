@@ -1,0 +1,19 @@
+<div class="sidebar">
+    <input
+      type="text"
+      placeholder="Rechercher un projet..."
+      [(ngModel)]="searchText"
+      (input)="onSearchChange()"
+    />
+  
+    <div class="tags">
+      <span
+        *ngFor="let tag of tags"
+        (click)="toggleTag(tag)"
+        [class.active]="isActive(tag)"
+      >
+        {{ tag }}
+      </span>
+    </div>
+  </div>
+  

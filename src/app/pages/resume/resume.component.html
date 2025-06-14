@@ -1,8 +1,11 @@
-<ngx-timeline
+<div class="timeline">
+
+  <ngx-timeline 
   [reverseOrder]="true"
   [events]="events"
   [eventCustomTemplate]="customEventTemplate"
-></ngx-timeline>
+  ></ngx-timeline>
+</div>
 
 <ng-template #customEventTemplate let-event="event">
   <div
