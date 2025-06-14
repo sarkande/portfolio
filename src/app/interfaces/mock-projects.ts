@@ -8,9 +8,9 @@ export const mockProjects: ProjectModel[] = [
         "startDate": "2022-02-01",
         "endDate": "2022-03-01",
         "technologies": [
-            "ReactJS",
+            "React",
             "TypeScript",
-            "REST Php"
+            "REST"
         ],
         "tags": [
             "Front",
@@ -29,15 +29,14 @@ export const mockProjects: ProjectModel[] = [
     {
         "id": "capture-trame",
         "title": "Capture trame",
-        "description": "Décompilation de trames du jeu Dofus, exploitation en C# avec UI en Electron/ReactJS.",
+        "description": "Décompilation de trames du jeu Dofus, exploitation en CSharp avec UI en Electron/ReactJS.",
         "startDate": "2022-04-01",
         "endDate": "2022-06-01",
         "technologies": [
-            "C#",
-            "ReactJS",
+            "CSharp",
+            "React",
             "Electron",
-            "Test unitaire",
-            "Retro Engineering"
+            "Reverse Engineering"
         ],
         "tags": [
             "Electron",
@@ -59,15 +58,15 @@ export const mockProjects: ProjectModel[] = [
     {
         "id": "better-organizer",
         "title": "BetterOrganizer",
-        "description": "Refonte du logiciel Organizer de Naio en C#, Electron, ReactJS et NodeJS.",
+        "description": "Refonte du logiciel Organizer de Naio en CSharp, Electron, ReactJS et Node.js.",
         "startDate": "2022-07-01",
         "endDate": "2022-08-01",
         "technologies": [
-            "ReactJS",
+            "React",
             "Electron",
-            "NodeJS",
-            "C#",
-            "REDUX"
+            "Node.js",
+            "CSharp",
+            "Redux"
         ],
         "tags": [
             "Electron",
@@ -92,9 +91,9 @@ export const mockProjects: ProjectModel[] = [
         "startDate": "2022-09-01",
         "endDate": "2022-10-01",
         "technologies": [
-            "ReactJS",
-            "REDUX",
-            "Npm"
+            "React",
+            "Redux",
+            "NPM"
         ],
         "tags": [
             "Component",
@@ -115,12 +114,12 @@ export const mockProjects: ProjectModel[] = [
     {
         "id": "argentbank",
         "title": "ArgentBank",
-        "description": "Application bancaire React avec REDUX et gestion d'authentification via API REST.",
+        "description": "Application bancaire React avec Redux et gestion d'authentification via API REST.",
         "startDate": "2022-07-01",
         "endDate": "2022-08-01",
         "technologies": [
-            "ReactJS",
-            "REDUX",
+            "React",
+            "Redux",
             "REST"
         ],
         "tags": [
@@ -146,7 +145,7 @@ export const mockProjects: ProjectModel[] = [
         "startDate": "2022-06-01",
         "endDate": "2022-07-01",
         "technologies": [
-            "ReactJS",
+            "React",
             "D3JS",
             "REST"
         ],
@@ -173,7 +172,7 @@ export const mockProjects: ProjectModel[] = [
         "startDate": "2022-05-01",
         "endDate": "2022-06-01",
         "technologies": [
-            "ReactJS",
+            "React",
             "REST"
         ],
         "tags": [
@@ -226,8 +225,7 @@ export const mockProjects: ProjectModel[] = [
         "startDate": "2022-03-01",
         "endDate": "2022-03-31",
         "technologies": [
-            "JS",
-            "Tests",
+            "JavaScript",
             "Jest"
         ],
         "tags": [
@@ -254,9 +252,9 @@ export const mockProjects: ProjectModel[] = [
         "startDate": "2022-02-01",
         "endDate": "2022-02-28",
         "technologies": [
-            "JS",
+            "JavaScript",
             "REST",
-            "Npm"
+            "NPM"
         ],
         "tags": [
             "Recettes",
@@ -282,7 +280,7 @@ export const mockProjects: ProjectModel[] = [
         "startDate": "2022-01-01",
         "endDate": "2022-01-31",
         "technologies": [
-            "JS",
+            "JavaScript",
             "Accessibility"
         ],
         "tags": [
@@ -307,7 +305,7 @@ export const mockProjects: ProjectModel[] = [
         "startDate": "2021-12-01",
         "endDate": "2021-12-31",
         "technologies": [
-            "JS",
+            "JavaScript",
             "Regex"
         ],
         "tags": [
@@ -332,11 +330,11 @@ export const mockProjects: ProjectModel[] = [
         "startDate": "2022-01-01",
         "endDate": null,
         "technologies": [
-            "ReactJS",
+            "React",
             "Electron",
-            "NodeJS",
-            "C#",
-            "REDUX"
+            "Node.js",
+            "CSharp",
+            "Redux"
         ],
         "tags": [
             "AutoImport"
@@ -358,8 +356,8 @@ export const mockProjects: ProjectModel[] = [
         "startDate": "2022-01-01",
         "endDate": null,
         "technologies": [
-            "HTML",
-            "SASS"
+            "HTML5",
+            "Sass"
         ],
         "tags": [
             "AutoImport"
@@ -381,8 +379,8 @@ export const mockProjects: ProjectModel[] = [
         "startDate": "2022-01-01",
         "endDate": null,
         "technologies": [
-            "HTML",
-            "CSS"
+            "HTML5",
+            "CSS3"
         ],
         "tags": [
             "AutoImport"
@@ -404,8 +402,7 @@ export const mockProjects: ProjectModel[] = [
         "startDate": "2022-01-01",
         "endDate": null,
         "technologies": [
-            "JS",
-            "Framework"
+            "JavaScript",
         ],
         "tags": [
             "AutoImport"
@@ -429,7 +426,7 @@ export const mockProjects: ProjectModel[] = [
         "technologies": [
             "AngularJS",
             "RubyOnRails",
-            "SHELL"
+            "Bash"
         ],
         "tags": [
             "AutoImport"
@@ -474,8 +471,8 @@ export const mockProjects: ProjectModel[] = [
         "startDate": "2022-01-01",
         "endDate": null,
         "technologies": [
-            "Unity3D",
-            "C#",
+            "Unity",
+            "CSharp",
             "Android"
         ],
         "tags": [
@@ -544,9 +541,9 @@ export const mockProjects: ProjectModel[] = [
         "startDate": "2022-01-01",
         "endDate": null,
         "technologies": [
-            "Unity3D",
-            "C#",
-            "Maya 3D"
+            "Unity",
+            "CSharp",
+            "Autodesk Maya"
         ],
         "tags": [
             "AutoImport"
@@ -568,9 +565,9 @@ export const mockProjects: ProjectModel[] = [
         "startDate": "2022-01-01",
         "endDate": null,
         "technologies": [
-            "Unity3D",
-            "C#",
-            "Maya 3D"
+            "Unity",
+            "CSharp",
+            "Autodesk Maya"
         ],
         "tags": [
             "AutoImport"
@@ -592,8 +589,8 @@ export const mockProjects: ProjectModel[] = [
         "startDate": "2022-01-01",
         "endDate": null,
         "technologies": [
-            "Unity3D",
-            "C#",
+            "Unity",
+            "CSharp",
             "Android"
         ],
         "tags": [
@@ -616,7 +613,7 @@ export const mockProjects: ProjectModel[] = [
         "startDate": "2022-01-01",
         "endDate": null,
         "technologies": [
-            "JS",
+            "JavaScript",
             "API Google"
         ],
         "tags": [
@@ -639,7 +636,7 @@ export const mockProjects: ProjectModel[] = [
         "startDate": "2022-01-01",
         "endDate": null,
         "technologies": [
-            "JS",
+            "JavaScript",
             "NeutralinoJS",
             "Tesseract"
         ],
@@ -664,7 +661,7 @@ export const mockProjects: ProjectModel[] = [
         "startDate": "2022-01-01",
         "endDate": null,
         "technologies": [
-            "JS",
+            "JavaScript",
             "NeutralinoJS"
         ],
         "tags": [
@@ -689,7 +686,7 @@ export const mockProjects: ProjectModel[] = [
         "endDate": null,
         "technologies": [
             "WPF",
-            "C#"
+            "CSharp"
         ],
         "tags": [
             "AutoImport"
@@ -778,7 +775,7 @@ export const mockProjects: ProjectModel[] = [
         "startDate": "2022-01-01",
         "endDate": null,
         "technologies": [
-            "JS"
+            "JavaScript"
         ],
         "tags": [
             "AutoImport"
@@ -801,7 +798,7 @@ export const mockProjects: ProjectModel[] = [
         "endDate": null,
         "technologies": [
             "WinForm",
-            "C#"
+            "CSharp"
         ],
         "tags": [
             "AutoImport"

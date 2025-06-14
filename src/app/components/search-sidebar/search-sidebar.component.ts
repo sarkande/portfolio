@@ -1,11 +1,12 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { IconPipe } from '../../pipes/icon.pipe';
 
 @Component({
   selector: 'app-search-sidebar',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, IconPipe],
   templateUrl: './search-sidebar.component.html',
   styleUrl: './search-sidebar.component.scss',
 })

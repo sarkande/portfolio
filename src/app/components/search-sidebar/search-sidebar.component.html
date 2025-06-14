@@ -12,6 +12,7 @@
         (click)="toggleTag(tag)"
         [class.active]="isActive(tag)"
       >
+        <img [src]="'/assets/' + (tag | icon) + '.svg'" alt="Tag Icon" width="16" height="16" />
         {{ tag }}
       </span>
     </div>
