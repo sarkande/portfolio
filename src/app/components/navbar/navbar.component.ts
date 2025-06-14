@@ -30,7 +30,7 @@ export class NavbarComponent {
     },
     {
       name: 'LinkedIn',
-      icon: 'linkedin.svg',
+      icon: 'LinkedIn.svg',
       url: 'https://www.linkedin.com/in/allan-perez-gonzalez/',
     },
   ];
