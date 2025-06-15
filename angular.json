@@ -32,6 +32,8 @@
               },
               "src/assets",
               "src/i18n",
+              "src/icons",
+              "src/projects",
               "src/favicon.ico"
             ],
             "styles": [

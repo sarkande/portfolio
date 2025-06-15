@@ -9,8 +9,9 @@ export interface ProjectModel {
 	category: 'Personnel' | 'Formation' | 'Professionnel' | 'Hackathon' | string;
 	thumbnailUrl: string;
 	gallery: string[];
-	githubUrl?: string | null;
+	gitUrl?: string | null;
 	liveUrl?: string | null;
 	role: string;
 	isFeatured: boolean;
+	active: boolean;
 }
