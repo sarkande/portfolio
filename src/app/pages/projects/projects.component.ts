@@ -4,6 +4,7 @@ import { ProjectModel } from '../../interfaces/project.model';
 import { ProjectCardComponent } from '../../components/project-card.component';
 import { CommonModule } from '@angular/common';
 import { SearchSidebarComponent } from '../../components/search-sidebar/search-sidebar.component';
+import { ProjectService } from '../../services/project.service';
 
 @Component({
   selector: 'app-projects',
@@ -26,6 +27,8 @@ export class ProjectsComponent implements OnInit {
   private currentStartYear: number = this.minYear;
   private currentEndYear: number = this.maxYear;
 
+  constructor(private projectService: ProjectService) {}
+  
   ngOnInit() {
     const years = this.projects.flatMap((p) => {
       const start = parseInt(p.startDate.slice(0, 4));
