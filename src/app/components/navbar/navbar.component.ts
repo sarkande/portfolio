@@ -42,6 +42,10 @@ export class NavbarComponent {
   }
 
   switchLang(lang: string) {
-    this.router.navigate(['/', lang]);
+    const segments = this.router.url.split('/').slice(2);
+    const targetPath = [lang, ...segments].join('/');
+    if (this.router.url !== `/${targetPath}`) {
+      this.router.navigate([lang, ...segments]);
+    }
   }
 }

@@ -1,24 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { mockProjects } from '../../interfaces/mock-projects';
+// import { mockProjects } from '../../interfaces/mock-projects.tsd';
 import { ProjectModel } from '../../interfaces/project.model';
 import { ProjectCardComponent } from '../../components/project-card.component';
 import { CommonModule } from '@angular/common';
 import { SearchSidebarComponent } from '../../components/search-sidebar/search-sidebar.component';
 import { ProjectService } from '../../services/project.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-projects',
   standalone: true,
   imports: [ProjectCardComponent, CommonModule, SearchSidebarComponent],
-  templateUrl: './projects.component.html',
-  styleUrl: './projects.component.scss',
+  templateUrl: './project-list.component.html',
+  styleUrl: './project-list.component.scss',
 })
-export class ProjectsComponent implements OnInit {
-  projects: ProjectModel[] = mockProjects;
+export class ProjectListComponent implements OnInit {
+  projects: ProjectModel[] = [];
   filtered: ProjectModel[] = [...this.projects];
 
   minYear: number = 2000;
   maxYear: number = new Date().getFullYear();
+
 
   private currentSearch = '';
   private currentTags: string[] = [];
@@ -27,18 +29,30 @@ export class ProjectsComponent implements OnInit {
   private currentStartYear: number = this.minYear;
   private currentEndYear: number = this.maxYear;
 
-  constructor(private projectService: ProjectService) {}
-  
+  constructor(private projectService: ProjectService, private router: Router, private route: ActivatedRoute) { }
+
   ngOnInit() {
-    const years = this.projects.flatMap((p) => {
-      const start = parseInt(p.startDate.slice(0, 4));
-      const end = p.endDate ? parseInt(p.endDate.slice(0, 4)) : start;
-      return [start, end];
+    this.projectService.getProjects().subscribe({
+      next: (projects) => {
+        console.log('Projects loaded:', projects);
+        this.projects = projects;
+        this.filtered = [...this.projects];
+
+        const years = this.projects.flatMap((p) => {
+          const start = parseInt(p.startDate.slice(0, 4));
+          const end = p.endDate ? parseInt(p.endDate.slice(0, 4)) : start;
+          return [start, end];
+        });
+
+        this.minYear = Math.min(...years);
+        this.maxYear = Math.max(...years);
+        this.currentStartYear = this.minYear;
+        this.currentEndYear = this.maxYear;
+      },
+      error: (error) => {
+        console.log('Error:', error);
+      },
     });
-    this.minYear = Math.min(...years);
-    this.maxYear = Math.max(...years);
-    this.currentStartYear = this.minYear;
-    this.currentEndYear = this.maxYear;
   }
 
   onFiltersChanged(filters: {
@@ -101,5 +115,10 @@ export class ProjectsComponent implements OnInit {
       p.technologies.forEach((t) => tagSet.add(t))
     );
     return Array.from(tagSet).sort();
+  }
+  handleClickProject(slug: string) {
+    // Navigate to the project details page
+    console.log('Project clicked:', slug);
+    this.router.navigate([slug], { relativeTo: this.route });
   }
 }

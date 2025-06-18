@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Observable } from 'rxjs';
-import { ProjectResponse } from '../interfaces/project';
+import { ProjectModel } from '../interfaces/project.model';
 
 @Injectable({
   providedIn: 'root',
@@ -9,14 +9,14 @@ import { ProjectResponse } from '../interfaces/project';
 export class ProjectService {
   constructor(private apiService: ApiService) { }
 
-  createProject(projectData: ProjectResponse, userId: number): Observable<any> {
+  createProject(projectData: ProjectModel, userId: number): Observable<any> {
     return this.apiService.post('/project?userId=' + userId, projectData);
   }
 
-  getProject(project_slug: number): Observable<ProjectResponse> {
+  getProject(project_slug: string): Observable<ProjectModel> {
     return this.apiService.get('/projects/' + project_slug);
   }
-  getProjects(): Observable<ProjectResponse> {
+  getProjects(): Observable<ProjectModel[]> {
     return this.apiService.get('/projects');
   }
 

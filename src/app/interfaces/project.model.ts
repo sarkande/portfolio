@@ -1,5 +1,6 @@
 export interface ProjectModel {
-	id: string;
+	id: number;
+	slug: string;
 	title: string;
 	description: string;
 	startDate: string; // Format ISO: 'YYYY-MM-DD'
