@@ -1,1 +1,25 @@
-<p>project works!</p>
+<div class="project-details">
+    <h1>{{ project.title }}</h1>
+    <p>{{ project.description }}</p>
+    <p><strong>Category:</strong> Projets récents</p>
+    <p>
+        <strong>Période:</strong>
+        {{ project.startDate }} - {{ project.endDate }}
+    </p>
+    <p><strong>Rôle:</strong> {{ project.role }}</p>
+    <p>
+        <strong>Technologies:</strong>
+        <span *ngFor="let tech of project.technologies; let i = index">
+            {{ tech }}<span *ngIf="i < project.technologies.length - 1">, </span>
+        </span>
+    </p>
+    <p *ngIf="project.liveUrl">
+        <a [href]="project.liveUrl" target="_blank" rel="noopener">Voir le site</a>
+    </p>
+    <div *ngIf="project.gallery && project.gallery.length">
+        <h3>Galerie</h3>
+        <app-carousel
+            [images]="project.gallery"
+            />
+    </div>
+</div>

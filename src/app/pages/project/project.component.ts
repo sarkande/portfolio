@@ -2,10 +2,12 @@ import { Component } from '@angular/core';
 import { ProjectService } from '../../services/project.service';
 import { ProjectModel } from '../../interfaces/project.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { CarouselComponent } from '../../components/carousel/carousel.component';
 
 @Component({
   selector: 'app-project',
-  imports: [],
+  imports: [CommonModule, CarouselComponent],
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.scss']
 })
