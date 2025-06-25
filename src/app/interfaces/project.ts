@@ -22,5 +22,7 @@ export interface ProjectResponse{
     isFeatured: boolean;
     active: boolean;
 
+    content: string;  // contenu en Markdown
+
 }
   

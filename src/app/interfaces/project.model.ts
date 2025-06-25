@@ -15,4 +15,5 @@ export interface ProjectModel {
 	role: string;
 	isFeatured: boolean;
 	active: boolean;
+	content: string; // Contenu en Markdown
 }
