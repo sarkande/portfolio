@@ -23,5 +23,8 @@
   "home.description7": "Full-stack, front et back.",
   "home.description8": "Web réactif et bien pensé.",
   "home.description9": "À jour sur les technos.",
-  "home.description10": "Utile, durable et élégant."
+  "home.description10": "Utile, durable et élégant.",
+
+  "error.404":"Oups ! La page que vous recherchez n'existe pas.",
+  "error.go_home":"Retour à l'accueil"
 }

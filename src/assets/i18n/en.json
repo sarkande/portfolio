@@ -23,5 +23,8 @@
   "home.description7": "Full-stack, front and back.",
   "home.description8": "Smart, modern, reactive web.",
   "home.description9": "Tech-savvy and up-to-date.",
-  "home.description10": "Useful, lasting, well made."
+  "home.description10": "Useful, lasting, well made.",
+
+  "error.404": "Oops! The page you are looking for does not exist.",
+  "error.go_home": "Return to Home"
 }

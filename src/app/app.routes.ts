@@ -10,7 +10,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { ErrorNotFoundComponent } from './pages/error-not-found/error-not-found.component';
 import { LangGuard } from './guards/lang.guard';
 
-// on précise : childRoutes est un Routes, donc Route[]
+
 const childRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'projects', component: ProjectListComponent },
@@ -24,7 +24,6 @@ const childRoutes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: '404', component: ErrorNotFoundComponent },
-  // toute URL non listée ici renvoie à /:lang/404
   { path: '**', redirectTo: '404', pathMatch: 'full' },
 ];
 
@@ -32,12 +31,8 @@ export const routes: Routes = [
   {
     path: ':lang',
     canActivate: [LangGuard],
-    children: childRoutes,   // ➜ plus d’erreur, c’est bien un Routes
+    children: childRoutes,
   },
-
-  // redirige la racine vers /fr
   { path: '', redirectTo: 'fr', pathMatch: 'full' },
-
-  // tout le reste vers /fr/404
   { path: '**', redirectTo: 'fr/404', pathMatch: 'full' },
 ];
