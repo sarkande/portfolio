@@ -15,6 +15,23 @@ export class LanguageService {
     this.langSubject.next(defaultLang);
   }
 
+  translateContent(content: string): string {
+    //get current language
+    const currentLang = this.langSubject.value;
+    // content can be a string or a json so we need to try to parse it
+    try {
+      const parsedContent = JSON.parse(content);
+      if (parsedContent[currentLang]) {
+        return parsedContent[currentLang];
+      } else {
+        return parsedContent['fr'] || parsedContent['en'] || content; // fallback to 'fr' or 'en'
+      }
+    } catch (e) {
+      // If parsing fails, return the original content
+      return content;
+    }
+
+  }
   setLang(lang: string) {
     this.langSubject.next(lang);
     this.translate.use(lang);

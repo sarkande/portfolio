@@ -54,7 +54,7 @@ export class ProjectComponent implements OnInit, OnDestroy {
         switchMap(params => {
           const slug = params.get('slug');
           if (!slug) {
-            this.router.navigate(['/404']);
+            this.router.navigate(['/', this.currentLang, '404']);
             return of(null);
           }
           return this.projectService.getProjects()
@@ -70,13 +70,13 @@ export class ProjectComponent implements OnInit, OnDestroy {
         const { projects, slug } = result;
         const idx = projects.findIndex(p => p.slug === slug);
         if (idx === -1) {
-          this.router.navigate(['/404']);
+          this.router.navigate(['/', this.currentLang, '404']);
           return;
         }
         // assignation
-        this.project = projects[idx];
-        this.prevProject = projects[idx - 1];
-        this.nextProject = projects[idx + 1];
+        this.project = this.translateProject(projects[idx]);
+        this.prevProject = this.translateProject(projects[idx - 1]);
+        this.nextProject = this.translateProject(projects[idx + 1]);
         this.buildToc(this.project.content);
       });
   }
@@ -95,5 +95,17 @@ export class ProjectComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  translateProject(project: ProjectModel): ProjectModel {
+    console.log('Translating project:', project);
+    if (!project) return project;
+    console.log('Current language:', this.currentLang);
+    return {
+      ...project,
+      title: this.langService.translateContent(project.title),
+      description: this.langService.translateContent(project.description),
+      content: this.langService.translateContent(project.content)
+    };
   }
 }

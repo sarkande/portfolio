@@ -25,4 +25,5 @@ export class ProjectService {
   deleteProject(project_slug: string): Observable<any> {
     return this.apiService.delete('/projects/' + project_slug);
   }
+  
 }

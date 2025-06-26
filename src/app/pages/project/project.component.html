@@ -13,10 +13,10 @@
           [routerLink]="['/', currentLang, 'projects', prevProject.slug]"
           class="nav-link prev"
           >← {{ prevProject.title }}</a
-        > 
+        >
         <a
           *ngIf="nextProject"
-          [routerLink]="['/',  currentLang,'projects', nextProject.slug]"
+          [routerLink]="['/', currentLang, 'projects', nextProject.slug]"
           class="nav-link next"
           >{{ nextProject.title }} →</a
         >
@@ -26,24 +26,6 @@
 
     <!-- Sommaire en début -->
     <nav *ngIf="toc.length" class="toc">
-      <h2>Sommaire</h2>
-      <ul>
-        <li
-          *ngFor="let item of toc"
-          [style.paddingLeft.px]="(item.level - 2) * 10"
-        >
-          <a [href]="'#' + item.slug">{{ item.text }}</a>
-        </li>
-      </ul>
-    </nav>
-
-    <!-- Contenu Markdown -->
-    <section class="post-content">
-      <markdown [data]="project.content"></markdown>
-    </section>
-
-    <!-- Sommaire en fin -->
-    <nav *ngIf="toc.length" class="toc toc-bottom">
       <h2>Sommaire</h2>
       <ul>
         <li
@@ -76,5 +58,10 @@
       <h3>Galerie</h3>
       <app-carousel [images]="project.gallery"></app-carousel>
     </div>
+
+    <!-- Contenu Markdown -->
+    <section class="post-content">
+      <markdown [data]="project.content"></markdown>
+    </section>
   </article>
 </div>
