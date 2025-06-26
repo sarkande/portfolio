@@ -12,6 +12,9 @@ export class ProjectService {
   createProject(projectData: ProjectModel): Observable<any> {
     return this.apiService.post('/projects', projectData);
   }
+  updateProject(project_slug: string, projectData: ProjectModel): Observable<any> {
+    return this.apiService.put('/projects/' + project_slug, projectData);
+  }
 
   getProject(project_slug: string): Observable<ProjectModel> {
     return this.apiService.get('/projects/' + project_slug);
@@ -19,5 +22,7 @@ export class ProjectService {
   getProjects(): Observable<ProjectModel[]> {
     return this.apiService.get('/projects');
   }
-
+  deleteProject(project_slug: string): Observable<any> {
+    return this.apiService.delete('/projects/' + project_slug);
+  }
 }

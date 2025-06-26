@@ -4,19 +4,8 @@ import { CommonModule } from '@angular/common';
 import { ProjectModel } from '../../interfaces/project.model';
 import { ProjectService } from '../../services/project.service';
 import { FormsModule } from '@angular/forms';
+import { ParsedProject } from '../../interfaces/parsed-project';
 
-interface ParsedProject extends ProjectModel {
-  titleFr: string;
-  titleEn: string;
-  descriptionFr: string;
-  descriptionEn: string;
-  contentFr: string;
-  contentEn: string;
-
-  technologiesStr?: string;
-  tagsStr?: string;
-  galleryStr?: string;
-}
 
 @Component({
   selector: 'app-panel-admin',
@@ -29,18 +18,13 @@ interface ParsedProject extends ProjectModel {
 export class PanelAdminComponent implements OnInit {
   projects: ParsedProject[] = [];
 
+  newProject: ParsedProject = this.getEmptyProject();
+
   quickCreate = false; 
   constructor(private projectService: ProjectService) { }
 
   ngOnInit() {
-    this.projectService.getProjects().subscribe({
-      next: projects => {
-        this.projects = projects.map(p => this.parseProject(p));
-      },
-      error: err => {
-        console.error('Error loading projects:', err);
-      }
-    });
+    this.loadProjects();
   }
 
   /**  
@@ -101,16 +85,130 @@ export class PanelAdminComponent implements OnInit {
 
     // Conversion finale pour l'envoi, on utilise l'interface ProjectModel
     const projectToSend: ProjectModel = {
-      ...project,
+      id: project.id,
+      slug: project.slug,
       title: project.title,
       description: project.description,
-      content: project.content,
+      startDate: project.startDate,
+      endDate: project.endDate,
       technologies: project.technologies || [],
       tags: project.tags || [],
-      gallery: project.gallery || []
+      category: project.category,
+      thumbnailUrl: project.thumbnailUrl,
+      gallery: project.gallery || [],
+      gitUrl: project.gitUrl,
+      liveUrl: project.liveUrl,
+      role: project.role || '',
+      isFeatured: project.isFeatured || false,
+      active: project.active,
+      content: project.content
     };
     console.log('Projet à envoyer e:', projectToSend);
-
+      this.projectService.updateProject(project.slug, projectToSend).subscribe({
+      next: (response) => {
+        console.log('Projet créé avec succès:', response);
+        // Met à jour la liste des projets après la création
+        this.loadProjects();
+      },
+      error: (error) => {
+        console.error('Erreur lors de la création du projet:', error);
+      }
+    });
   }
 
+  deleteProject(project: ParsedProject) {
+    if (confirm(`Êtes-vous sûr de vouloir supprimer le projet "${project.titleFr}" ?`)) {
+      this.projectService.deleteProject(project.slug).subscribe({
+        next: () => {
+          this.projects = this.projects.filter(p => p.id !== project.id);
+          console.log(`Projet "${project.titleFr}" supprimé avec succès.`);
+        },
+        error: (error) => {
+          console.error('Erreur lors de la suppression du projet:', error);
+        }
+      });
+    }
+  }
+
+  createProject() {
+    let projectToCreate: ProjectModel;
+
+    projectToCreate = {
+      slug: this.newProject.slug,
+      title: JSON.stringify({ fr: this.newProject.titleFr, en: this.newProject.titleEn }),
+      description: JSON.stringify({ fr: this.newProject.descriptionFr, en: this.newProject.descriptionEn }),
+      content: JSON.stringify({ fr: this.newProject.contentFr, en: this.newProject.contentEn }),
+      startDate: this.newProject.startDate,
+      endDate: this.newProject.endDate,
+      technologies: this.newProject.technologies || [],
+      tags: this.newProject.tags || [],
+      category: this.newProject.category,
+      thumbnailUrl: this.newProject.thumbnailUrl,
+      gallery: this.newProject.gallery || [],
+      gitUrl: this.newProject.gitUrl,
+      liveUrl: this.newProject.liveUrl,
+      role: this.newProject.role || '',
+      isFeatured: this.newProject.isFeatured || false,
+      active: true // Par défaut, le projet est actif
+    };
+    console.log('Projet à créer:', projectToCreate);
+
+    this.projectService.createProject(projectToCreate).subscribe({
+      next: (response) => {
+        console.log('Projet créé avec succès:', response);
+        // Réinitialise le formulaire après la création
+        this.newProject = this.getEmptyProject();
+        this.quickCreate = false; // Ferme le formulaire de création rapide
+        // Recharge la liste des projets
+        this.loadProjects();
+      },
+      error: (error) => {
+        console.error('Erreur lors de la création du projet:', error);
+      }
+    });
+  }
+
+
+
+  loadProjects() {
+    this.projectService.getProjects().subscribe({
+      next: projects => {
+        this.projects = projects.map(p => this.parseProject(p));
+      },
+      error: err => {
+        console.error('Error loading projects:', err);
+      }
+    });
+  }
+
+  private getEmptyProject(): ParsedProject {
+    return {
+      id: 0,
+      slug: '',
+      title: '',
+      description: '',
+      content: '',
+      startDate: '',
+      endDate: '',
+      technologies: [],
+      tags: [],
+      category: '',
+      thumbnailUrl: '',
+      gallery: [],
+      gitUrl: '',
+      liveUrl: '',
+      role: '',
+      isFeatured: false,
+      active: true,
+      titleFr: '',
+      titleEn: '',
+      descriptionFr: '',
+      descriptionEn: '',
+      contentFr: '',
+      contentEn: '',
+      technologiesStr: '',
+      tagsStr: '',
+      galleryStr: ''
+    };
+  }
 }
