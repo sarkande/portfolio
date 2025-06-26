@@ -40,12 +40,10 @@ export class ApiService {
   }
 
   private handleError(error: HttpErrorResponse) {
-    console.error('An error occurred:', error.error.message);
     var errorMessage = {
-      message: error.error.message,
+      message: error?.error?.message,
       status: error.status,
     };
-    console.error(errorMessage);
 
     return throwError(() => errorMessage);
   }

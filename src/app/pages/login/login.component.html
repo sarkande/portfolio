@@ -2,16 +2,15 @@
     <h2>Connexion</h2>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
-        <label for="email">Adresse email</label>
+        <label for="login">Utilisateur</label>
         <input
-          type="email"
-          id="email"
-          formControlName="email"
-          [class.is-invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+          type="login"
+          id="login"
+          formControlName="login"
+          [class.is-invalid]="loginForm.get('login')?.invalid && loginForm.get('login')?.touched"
         />
-        <div *ngIf="loginForm.get('email')?.errors" class="error-message">
-          <div *ngIf="loginForm.get('email')?.hasError('required')">L'email est obligatoire</div>
-          <div *ngIf="loginForm.get('email')?.hasError('email')">Format d'email invalide</div>
+        <div *ngIf="loginForm.get('login')?.errors" class="error-message">
+          <div *ngIf="loginForm.get('login')?.hasError('required')">Le login est obligatoire</div>
         </div>
       </div>
   
@@ -25,7 +24,6 @@
         />
         <div *ngIf="loginForm.get('password')?.errors" class="error-message">
           <div *ngIf="loginForm.get('password')?.hasError('required')">Le mot de passe est obligatoire</div>
-          <div *ngIf="loginForm.get('password')?.hasError('minlength')">Minimum 8 caractères</div>
         </div>
       </div>
   

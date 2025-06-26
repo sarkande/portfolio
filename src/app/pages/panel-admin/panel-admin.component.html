@@ -1,1 +1,131 @@
-<p>panel-admin works!</p>
+<div class="container">
+  <h1>Administration des projets</h1>
+  <button
+    *ngIf="!quickCreate"
+    class="btn btn-primary"
+    (click)="openQuickCreate()"
+  >
+    Ajouter un projet
+  </button>
+
+  <table class="projects-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Slug</th>
+        <th>Titre FR</th>
+        <th>Titre EN</th>
+        <th>Description FR</th>
+        <th>Description EN</th>
+        <th>Date début</th>
+        <th>Date fin</th>
+        <th>Tech.</th>
+        <th>Tags</th>
+        <th>Catégorie</th>
+        <th>Vignette</th>
+        <th>Galerie</th>
+        <th>Git</th>
+        <th>Live</th>
+        <th>Rôle</th>
+        <th>Feat.</th>
+        <th>Actif</th>
+        <th>Contenu FR</th>
+        <th>Contenu EN</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="quickCreate" class="quick-create-row">
+        <td>—</td>
+        <td>—</td>
+        <td class="editable"><input type="text" placeholder="Titre FR" /></td>
+        <td class="editable"><input type="text" placeholder="Titre EN" /></td>
+        <td class="editable">
+          <input type="text" placeholder="Description FR" />
+        </td>
+        <td class="editable">
+          <input type="text" placeholder="Description EN" />
+        </td>
+        <td class="editable"><input type="date" placeholder="Date début" /></td>
+        <td class="editable">
+          <input type="date" placeholder="Date fin (optionnel)" />
+        </td>
+        <td class="editable">
+          <input
+            type="text"
+            placeholder="Technologies (séparées par des virgules)"
+          />
+        </td>
+        <td class="editable">
+          <input type="text" placeholder="Tags (séparés par des virgules)" />
+        </td>
+        <td class="editable"><input type="text" placeholder="Catégorie" /></td>
+        <td>
+          <input
+            type="file"
+            accept=".jpg, .jpeg, .png, .gif, .webp, .svg, .avif, .ico, .bmp, .tiff, .tif, .jfif, .jpe, .jif, .pjpeg, .pjp, .apng, .avif, .heic, .heif"
+          />
+        </td>
+        <td class="gallery-cell">
+          <textarea
+            rows="2"
+            cols="30"
+            placeholder="Galerie (URLs séparées par des points-virgules)"
+          ></textarea>
+        </td>
+        <td><input type="url" placeholder="URL du dépôt Git" /></td>
+        <td><input type="url" placeholder="URL du site en ligne" /></td>
+        <td class="editable"><input type="text" placeholder="Rôle" /></td>
+        <td><input type="checkbox" /></td>
+        <td><input type="checkbox" /></td>
+        <td class="content-cell editable">
+          <textarea rows="2" cols="30" placeholder="Contenu FR"></textarea>
+        </td>
+        <td class="content-cell editable">
+          <textarea rows="2" cols="30" placeholder="Contenu EN"></textarea>
+        </td>
+        <td class="content-cell editable">
+          <button class="btn btn-secondary">Créer</button>
+        </td>
+      </tr>
+      <tr *ngFor="let p of projects" [attr.id]="p.slug">
+        <td>{{ p.id }}</td>
+        <td class="editable">{{ p.slug }}</td>
+        <td class="editable"><input type="text" [(ngModel)]="p.titleFr" /></td>
+        <td class="editable"><input type="text" [(ngModel)]="p.titleEn" /></td>
+        <td class="editable"><input type="text" [(ngModel)]="p.descriptionFr" /></td>
+        <td class="editable"><input type="text" [(ngModel)]="p.descriptionEn" /></td>
+        <td class="editable"><input type="date" [(ngModel)]="p.startDate" /></td>
+        <td class="editable">
+          <input type="date" [(ngModel)]="p.endDate" placeholder="—" />
+        </td>
+        <td class="editable">
+          <input type="text" [(ngModel)]="p.technologiesStr" />
+        </td>
+        <td class="editable">
+          <input type="text" [(ngModel)]="p.tagsStr" />
+        </td>
+        <td class="editable"><input type="text" [(ngModel)]="p.category" /></td>
+        <td class="editable"><input type="text" [(ngModel)]="p.thumbnailUrl" /></td>
+        <td class="gallery-cell">
+          <input type="text" [(ngModel)]="p.galleryStr" />
+        </td>
+        <td class="editable"><input type="url" [(ngModel)]="p.gitUrl" /></td>
+        <td class="editable"><input type="url" [(ngModel)]="p.liveUrl" /></td>
+        <td class="editable"><input type="text" [(ngModel)]="p.role" /></td>
+        <td class="editable">
+          <input type="checkbox" [checked]="p.isFeatured" />
+        </td>
+        <td class="editable">
+          <input type="checkbox" [checked]="p.active" />
+        </td>
+        <td class="editable"><input type="text" [(ngModel)]="p.contentFr" /></td>
+        <td class="editable"><input type="text" [(ngModel)]="p.contentEn" /></td>
+        <td class="actions-cell">
+          <button class="btn btn-secondary" (click)="editProject(p)">Modifier</button>
+          <button class="btn btn-danger">Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -9,8 +9,8 @@ import { ProjectModel } from '../interfaces/project.model';
 export class ProjectService {
   constructor(private apiService: ApiService) { }
 
-  createProject(projectData: ProjectModel, userId: number): Observable<any> {
-    return this.apiService.post('/project?userId=' + userId, projectData);
+  createProject(projectData: ProjectModel): Observable<any> {
+    return this.apiService.post('/projects', projectData);
   }
 
   getProject(project_slug: string): Observable<ProjectModel> {
