@@ -35,8 +35,8 @@ export function markedOptionsFactory(): MarkedOptions {
     const text = Parser.parseInline(tokens);
     const slug = slugify(text);
     return (
-      `<h${depth} id="${slug}">` +
-      `<a name="${slug}" class="anchor" href="#${slug}">` +
+      `<h${depth} id="${slug}" name="${slug}"  id="${slug}" class="anchor" href="#${slug}">` +
+      `<a name="${slug}"  id="${slug}" class="anchor" href="#${slug}">` +
       '<span class="header-link"></span>' +
       `</a>${text}</h${depth}>`
     );
