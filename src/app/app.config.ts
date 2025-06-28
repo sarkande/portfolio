@@ -14,6 +14,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { MarkdownModule, MarkedOptions, MARKED_OPTIONS } from 'ngx-markdown';
 import { Renderer, Parser } from 'marked';
 
+
 import { JwtInterceptor } from './services/jwt.interceptor';
 
 export function markedOptionsFactory(): MarkedOptions {
@@ -22,6 +23,7 @@ export function markedOptionsFactory(): MarkedOptions {
     const text = Parser.parseInline(tokens);
     const slug = text.toLowerCase().trim().replace(/[^\w]+/g, '-');
     return `<h${depth} id="${slug}">${text}</h${depth}>`;
+
   };
   return { renderer } as MarkedOptions;
 }
@@ -44,6 +46,7 @@ export const appConfig: ApplicationConfig = {
       MarkdownModule.forRoot({
         markedOptions: {
           provide: MARKED_OPTIONS,
+
           useFactory: markedOptionsFactory,
         },
       }),
