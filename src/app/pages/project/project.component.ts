@@ -21,13 +21,14 @@ import { LanguageService } from '../../services/language.service';
   templateUrl: './project.component.html',
   styleUrls: ['./project.component.scss']
 })
-export class ProjectComponent implements OnInit, OnDestroy {
+export class ProjectComponent implements OnInit, OnDestroy  {
   project: ProjectModel | null = null;
   prevProject?: ProjectModel;
   nextProject?: ProjectModel;
   toc: Array<{ level: number; text: string; slug: string }> = [];
   isLoading = true;
   currentLang = 'fr';
+
 
   private projectService = inject(ProjectService);
   private route = inject(ActivatedRoute);
@@ -108,4 +109,8 @@ export class ProjectComponent implements OnInit, OnDestroy {
       content: this.langService.translateContent(project.content)
     };
   }
+
+
+
+
 }

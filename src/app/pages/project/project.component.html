@@ -23,19 +23,19 @@
       </div>
       <h1>{{ project.title }}</h1>
     </header>
-
     <!-- Sommaire en début -->
-    <nav *ngIf="toc.length" class="toc">
+    <nav *ngIf="!isLoading && project && toc.length" class="toc">
       <h2>Sommaire</h2>
       <ul>
         <li
           *ngFor="let item of toc"
           [style.paddingLeft.px]="(item.level - 2) * 10"
         >
-          <a [href]="'#' + item.slug">{{ item.text }}</a>
+          <a [routerLink]="[]" [fragment]="item.slug">{{ item.text }}</a>
         </li>
       </ul>
     </nav>
+
 
     <!-- Métadonnées du projet -->
     <section class="project-meta">
@@ -63,5 +63,22 @@
     <section class="post-content">
       <markdown [data]="project.content"></markdown>
     </section>
+
+    <header class="post-header">
+      <div class="nav-links">
+        <a
+          *ngIf="prevProject"
+          [routerLink]="['/', currentLang, 'projects', prevProject.slug]"
+          class="nav-link prev"
+          >← {{ prevProject.title }}</a
+        >
+        <a
+          *ngIf="nextProject"
+          [routerLink]="['/', currentLang, 'projects', nextProject.slug]"
+          class="nav-link next"
+          >{{ nextProject.title }} →</a
+        >
+      </div>
+    </header>
   </article>
 </div>
