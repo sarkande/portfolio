@@ -11,15 +11,19 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { MarkdownModule, MarkedOptions, MarkedRenderer } from 'ngx-markdown';
+import { MarkdownModule, MarkedOptions, MARKED_OPTIONS } from 'ngx-markdown';
+import { Renderer, Parser } from 'marked';
+
 
 import { JwtInterceptor } from './services/jwt.interceptor';
 
 export function markedOptionsFactory(): MarkedOptions {
-  const renderer = new MarkedRenderer();
-  renderer.heading = (text: string, level: number, raw: string, slugger) => {
-    const slug = slugger.slug(text);
-    return `<h${level} id="${slug}">${text}</h${level}>`;
+  const renderer = new Renderer();
+  renderer.heading = ({ tokens, depth }) => {
+    const text = Parser.parseInline(tokens);
+    const slug = text.toLowerCase().trim().replace(/[^\w]+/g, '-');
+    return `<h${depth} id="${slug}">${text}</h${depth}>`;
+
   };
   return { renderer } as MarkedOptions;
 }
@@ -41,7 +45,8 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(
       MarkdownModule.forRoot({
         markedOptions: {
-          provide: MarkedOptions,
+          provide: MARKED_OPTIONS,
+
           useFactory: markedOptionsFactory,
         },
       }),
