@@ -1,4 +1,4 @@
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, SecurityContext } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import {
   provideHttpClient,
@@ -61,9 +61,9 @@ export const appConfig: ApplicationConfig = {
     },
     importProvidersFrom(
       MarkdownModule.forRoot({
+        sanitize: SecurityContext.NONE,
         markedOptions: {
           provide: MARKED_OPTIONS,
-
           useFactory: markedOptionsFactory,
         },
       }),
