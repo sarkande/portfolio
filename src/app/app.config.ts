@@ -11,13 +11,14 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { MarkdownModule, MarkedOptions, MarkedRenderer } from 'ngx-markdown';
+import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
+import { Renderer, Slugger } from 'marked';
 
 import { JwtInterceptor } from './services/jwt.interceptor';
 
 export function markedOptionsFactory(): MarkedOptions {
-  const renderer = new MarkedRenderer();
-  renderer.heading = (text: string, level: number, raw: string, slugger) => {
+  const renderer = new Renderer();
+  renderer.heading = (text: string, level: number, raw: string, slugger: Slugger): string => {
     const slug = slugger.slug(text);
     return `<h${level} id="${slug}">${text}</h${level}>`;
   };
