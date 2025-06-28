@@ -29,6 +29,19 @@ export class ProjectComponent implements OnInit, OnDestroy  {
   isLoading = true;
   currentLang = 'fr';
 
+  private slugCounts: Record<string, number> = {};
+
+  private slugify(text: string): string {
+    let slug = text.toLowerCase().trim().replace(/[^\w]+/g, '-');
+    if (this.slugCounts[slug] !== undefined) {
+      const count = ++this.slugCounts[slug];
+      slug = `${slug}-${count}`;
+    } else {
+      this.slugCounts[slug] = 0;
+    }
+    return slug;
+  }
+
 
   private projectService = inject(ProjectService);
   private route = inject(ActivatedRoute);
@@ -85,10 +98,11 @@ export class ProjectComponent implements OnInit, OnDestroy  {
   private buildToc(markdown: string) {
     const regex = /^(#{2,6})\s+(.*)$/gm;
     let match: RegExpExecArray | null;
+    this.slugCounts = {};
     while ((match = regex.exec(markdown))) {
       const level = match[1].length;
       const text = match[2].trim();
-      const slug = text.toLowerCase().replace(/[^\w]+/g, '-');
+      const slug = this.slugify(text);
       this.toc.push({ level, text, slug });
     }
   }

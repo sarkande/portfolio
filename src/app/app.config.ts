@@ -11,9 +11,18 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { MarkdownModule } from 'ngx-markdown';
+import { MarkdownModule, MarkedOptions, MarkedRenderer } from 'ngx-markdown';
 
-import { JwtInterceptor } from './services/jwt.interceptor'; 
+import { JwtInterceptor } from './services/jwt.interceptor';
+
+export function markedOptionsFactory(): MarkedOptions {
+  const renderer = new MarkedRenderer();
+  renderer.heading = (text: string, level: number, raw: string, slugger) => {
+    const slug = slugger.slug(text);
+    return `<h${level} id="${slug}">${text}</h${level}>`;
+  };
+  return { renderer } as MarkedOptions;
+}
 
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -30,7 +39,12 @@ export const appConfig: ApplicationConfig = {
       multi: true,
     },
     importProvidersFrom(
-      MarkdownModule.forRoot(),
+      MarkdownModule.forRoot({
+        markedOptions: {
+          provide: MarkedOptions,
+          useFactory: markedOptionsFactory,
+        },
+      }),
       HttpClientModule,
       TranslateModule.forRoot({
         defaultLanguage: 'fr',
