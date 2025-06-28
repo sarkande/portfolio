@@ -11,8 +11,10 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { provideAnimations } from '@angular/platform-browser/animations';
+
 import { MarkdownModule, MarkedOptions, MARKED_OPTIONS, MarkedRenderer } from 'ngx-markdown';
 import { Parser } from 'marked';
+
 
 import { JwtInterceptor } from './services/jwt.interceptor';
 
@@ -38,6 +40,7 @@ export function markedOptionsFactory(): MarkedOptions {
       '<span class="header-link"></span>' +
       `</a>${text}</h${depth}>`
     );
+
   };
   return { renderer } as MarkedOptions;
 }
@@ -60,6 +63,7 @@ export const appConfig: ApplicationConfig = {
       MarkdownModule.forRoot({
         markedOptions: {
           provide: MARKED_OPTIONS,
+
           useFactory: markedOptionsFactory,
         },
       }),
