@@ -1,5 +1,5 @@
 import { ApplicationConfig, importProvidersFrom, SecurityContext } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
@@ -18,32 +18,29 @@ import { Parser } from 'marked';
 
 import { JwtInterceptor } from './services/jwt.interceptor';
 
+// Modification du module de markdown pour gérer les slugs uniques dans les titres
+// Dans le but de creer des ancres uniques pour chaque titre dans le contenu markdown
 export function markedOptionsFactory(): MarkedOptions {
   const renderer = new MarkedRenderer();
-  const slugCounts: Record<string, number> = {};
-  const slugify = (text: string): string => {
-    let slug = text.toLowerCase().trim().replace(/[^\w]+/g, '-');
-    if (slugCounts[slug] !== undefined) {
-      const count = ++slugCounts[slug];
-      slug = `${slug}-${count}`;
-    } else {
-      slugCounts[slug] = 0;
-    }
-    return slug;
-  };
+
+  const slugify = (text: string): string =>
+    text
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w]+/g, '-');
+
   renderer.heading = ({ tokens, depth }) => {
     const text = Parser.parseInline(tokens);
     const slug = slugify(text);
     return (
-      `<h${depth} id="${slug}" name="${slug}"  id="${slug}" class="anchor" href="#${slug}">` +
-      `<a name="${slug}"  id="${slug}" class="anchor" href="#${slug}">` +
-      '<span class="header-link"></span>' +
-      `</a>${text}</h${depth}>`
+      `<h${depth} id="${slug}" name="${slug}" class="anchor">` +
+      `${text}</h${depth}>`
     );
 
   };
   return { renderer } as MarkedOptions;
 }
+
 
 export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -51,7 +48,12 @@ export function createTranslateLoader(http: HttpClient): TranslateHttpLoader {
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes),
+    provideRouter(routes,
+      withInMemoryScrolling({
+        anchorScrolling: 'enabled',
+        scrollPositionRestoration: 'enabled',
+      })
+    ),
     provideHttpClient(withInterceptorsFromDi()),
     provideAnimations(),
     {

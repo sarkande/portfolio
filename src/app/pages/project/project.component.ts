@@ -29,20 +29,6 @@ export class ProjectComponent implements OnInit, OnDestroy  {
   isLoading = true;
   currentLang = 'fr';
 
-  private slugCounts: Record<string, number> = {};
-
-  private slugify(text: string): string {
-    let slug = text.toLowerCase().trim().replace(/[^\w]+/g, '-');
-    if (this.slugCounts[slug] !== undefined) {
-      const count = ++this.slugCounts[slug];
-      slug = `${slug}-${count}`;
-    } else {
-      this.slugCounts[slug] = 0;
-    }
-    return slug;
-  }
-
-
   private projectService = inject(ProjectService);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
@@ -50,15 +36,14 @@ export class ProjectComponent implements OnInit, OnDestroy  {
   private destroy$ = new Subject<void>();
 
   constructor() {
-    // écoute le changement de langue
     this.langService.currentLang$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(lang => this.currentLang = lang);
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(lang => this.currentLang = lang);
   }
-
+  
   ngOnInit() {
     this.route.paramMap
-      .pipe(
+    .pipe(
         tap(() => {
           // reset avant chaque chargement
           this.isLoading = true;
@@ -72,7 +57,7 @@ export class ProjectComponent implements OnInit, OnDestroy  {
             return of(null);
           }
           return this.projectService.getProjects()
-            .pipe(
+          .pipe(
               finalize(() => this.isLoading = false),
               switchMap(projects => of({ projects, slug }))
             );
@@ -93,12 +78,11 @@ export class ProjectComponent implements OnInit, OnDestroy  {
         this.nextProject = this.translateProject(projects[idx + 1]);
         this.buildToc(this.project.content);
       });
-  }
+    }
 
-  private buildToc(markdown: string) {
+    private buildToc(markdown: string) {
     const regex = /^(#{2,6})\s+(.*)$/gm;
     let match: RegExpExecArray | null;
-    this.slugCounts = {};
     while ((match = regex.exec(markdown))) {
       const level = match[1].length;
       const text = match[2].trim();
@@ -106,12 +90,12 @@ export class ProjectComponent implements OnInit, OnDestroy  {
       this.toc.push({ level, text, slug });
     }
   }
-
+  
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
   }
-
+  
   translateProject(project: ProjectModel): ProjectModel {
     console.log('Translating project:', project);
     if (!project) return project;
@@ -123,8 +107,15 @@ export class ProjectComponent implements OnInit, OnDestroy  {
       content: this.langService.translateContent(project.content)
     };
   }
-
-
-
-
+  
+  //Meme algo que pour slugify les titres dans le markdown (app.config.ts)
+  private slugify(text: string): string {
+    return text
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w]+/g, '-');
+  }
+  
+  
+  
 }
